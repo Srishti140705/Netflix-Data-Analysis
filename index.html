@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090b">
+  <meta name="description" content="Explore Srishti Raj’s Netflix Data Analysis: verified catalogue insights, interactive charts and 15 PostgreSQL business questions.">
+  <title>Netflix Data Analysis | Srishti Raj</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script defer src="assets/catalogue-data.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="header">
+    <a class="brand" href="#home" aria-label="Netflix Data Analysis home">NETFLIX<span> / DATA ANALYSIS</span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation">Menu <span aria-hidden="true">☰</span></button>
+    <nav id="navigation" aria-label="Main navigation">
+      <a href="#overview">Overview</a><a href="#dashboard">Dashboard</a><a href="#schema">Schema</a><a href="#analysis">SQL Analysis</a><a href="#insights">Insights</a><a href="#stack">Tech Stack</a>
+    </nav>
+    <a class="github-header" href="https://github.com/Srishti140705/Netflix-Data-Analysis" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+  </header>
+  <main id="main">
+    <section id="home" class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> THE CATALOGUE, THROUGH A DIFFERENT LENS</p>
+        <h1><span>NETFLIX</span><br>DATA ANALYSIS<span class="period">.</span></h1>
+        <h2>SQL-Driven Content Intelligence with PostgreSQL</h2>
+        <p class="hero-description">This project explores Netflix’s movies and TV shows catalogue using PostgreSQL and SQL to uncover patterns across content types, ratings, release years, countries, genres, actors, directors and platform addition trends.</p>
+        <div class="actions"><a class="button primary" href="#dashboard"><span aria-hidden="true">▶</span> Explore Dashboard</a><a class="button" href="#analysis">View SQL Analysis</a><a class="text-link" href="https://github.com/Srishti140705/Netflix-Data-Analysis" target="_blank" rel="noopener noreferrer">View GitHub ↗</a></div>
+        <p class="byline">AN ANALYTICS PROJECT BY <strong>SRISHTI RAJ</strong></p>
+      </div>
+      <div class="hero-visual" aria-label="Dataset preview">
+        <div class="visual-top"><span class="mono">CATALOGUE / 001</span><span class="tag">POSTGRESQL</span></div>
+        <div class="visual-number"><strong data-total>—</strong><span>titles. One catalogue.<br>Thousands of stories.</span></div>
+        <div class="signal-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="visual-bottom"><span>RAW DATA → SQL → INSIGHT</span><span class="red">15 QUERIES</span></div>
+      </div>
+    </section>
+    <div class="source-strip"><div class="wrap"><span><span class="dot"></span> VERIFIED FROM THE PROJECT CSV</span><span>Catalogue snapshot · additions through <b id="snapshot-date">September 2021</b></span><a href="#quality">Explore data quality ↗</a></div></div>
+    <section id="overview" class="section wrap">
+      <div class="section-heading"><div><p class="eyebrow">01 / THE PROJECT</p><h2>From catalogue to <span>context.</span></h2></div><p>A transparent journey from raw records to reproducible SQL analysis.</p></div>
+      <div class="overview-grid"><article class="panel overview-copy"><span class="small-label">PROJECT OVERVIEW</span><h3>What does the catalogue tell us?</h3><p>Explore the balance of movies and TV shows, where titles are associated, and how genres and release patterns vary. Fifteen business questions turn a single table into a structured view of the catalogue.</p><p>The raw dataset stays intact. Missing information, multi-value fields and suspicious ratings are handled explicitly during analysis.</p><div class="inline-tags"><span>PostgreSQL</span><span>Exploratory analysis</span><span>Static dashboard</span></div></article><article class="panel snapshot"><span class="small-label">DATASET AT A GLANCE</span><dl id="dataset-snapshot"></dl><p class="fine">A historical catalogue sample, not today’s Netflix library or a measure of audience demand.</p></article></div>
+      <ol class="workflow"><li><span>01</span>Netflix Dataset</li><li><span>02</span>PostgreSQL</li><li><span>03</span>Data Exploration</li><li><span>04</span>Data Quality Assessment</li><li><span>05</span>15 SQL Business Problems</li><li><span>06</span>Analytical Insights</li><li><span>07</span>Interactive Dashboard</li></ol>
+    </section>
+    <section id="dashboard" class="section dashboard-section">
+      <div class="wrap"><div class="section-heading"><div><p class="eyebrow">02 / EXPLORE THE DATA</p><h2>The catalogue. <span>At a glance.</span></h2></div><span class="verified"><span class="dot"></span> CSV-VERIFIED AGGREGATES</span></div>
+      <div class="kpis" id="kpis"></div>
+      <div class="dashboard-toolbar"><div><h3>Content intelligence</h3><p id="dashboard-status" aria-live="polite"></p></div><div class="segmented" role="group" aria-label="Dashboard content type"><button class="selected" data-content="all" aria-pressed="true">All titles</button><button data-content="movies" aria-pressed="false">Movies</button><button data-content="shows" aria-pressed="false">TV Shows</button></div></div>
+      <p id="chart-error" class="notice" hidden>Charts could not load. The verified values are still available in each chart’s data table. Connect to the internet and reload to enable Chart.js.</p>
+      <div class="chart-grid" id="chart-grid"></div>
+      <p class="method-note">COUNTING NOTES / Countries and genres are split on commas and trimmed; blank tokens are excluded. A title can appear in multiple categories. Ratings exclude missing and duration-like entries. Addition charts omit missing dates; 2021 is a partial year.</p>
+      <div class="india-panel"><div class="india-intro"><p class="eyebrow">COUNTRY SPOTLIGHT / INDIA</p><h3>A closer look <br>at Indian content.</h3><strong id="india-total"></strong><p>titles associated with India</p><div id="india-mix"></div><p class="fine">Exact country-token matching. Includes co-productions. This spotlight always shows all India-associated titles.</p></div><div class="india-chart" id="india-chart"></div><div class="india-people"><span class="small-label">MOST FREQUENT CAST CREDITS</span><ol id="india-actors"></ol><p class="fine">Number of titles featuring each actor; not a measure of popularity.</p></div></div>
+      </div>
+    </section>
+    <section id="schema" class="section wrap">
+      <div class="section-heading"><div><p class="eyebrow">03 / THE FOUNDATION</p><h2>One table. <span>Many dimensions.</span></h2></div><p>The exact PostgreSQL structure from <a href="sql/01_schema.sql">01_schema.sql ↗</a></p></div>
+      <div class="schema-grid"><div><h3>Built for structured exploration.</h3><p>PostgreSQL stores and queries the Netflix catalogue across content, geography, people, ratings and time.</p><p>The CSV field <code>cast</code> maps to <code>casts</code> in the database. Addition dates remain text in the source schema and are parsed when needed.</p><div class="schema-fact"><span class="small-label">PRIMARY KEY</span><strong>show_id</strong><span id="unique-ids"></span></div><a class="text-link" href="sql/01_schema.sql">Read the complete schema ↗</a></div><div class="panel schema-card"><div class="panel-bar"><strong><span class="red">▦</span> public.netflix</strong><span>12 COLUMNS</span></div><div class="table-scroll"><table><caption class="sr-only">Netflix PostgreSQL schema</caption><thead><tr><th scope="col">Column</th><th scope="col">PostgreSQL type</th><th scope="col">Purpose</th></tr></thead><tbody id="schema-rows"></tbody></table></div></div></div>
+      <details class="fields-details"><summary>View all original CSV field names</summary><div id="csv-fields" class="inline-tags"></div></details>
+    </section>
+    <section id="quality" class="section wrap">
+      <div class="section-heading"><div><p class="eyebrow">04 / TRUST THE PROCESS</p><h2>Quality before <span>conclusions.</span></h2></div><a class="text-link" href="sql/02_data_exploration.sql">View exploration SQL ↗</a></div>
+      <div class="quality-grid"><article class="panel"><span class="small-label">COMPLETENESS</span><h3>Missing values, made visible.</h3><div id="missing-values"></div><p class="fine">Blank CSV cells are counted as missing. SQL NULL handling depends on import settings.</p></article><article class="panel"><span class="small-label">VALIDATION & HANDLING</span><div id="quality-checks"></div></article></div>
+    </section>
+    <section id="analysis" class="section analysis-section"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">POSTGRESQL ANALYSIS</p><h2>15 BUSINESS <span>PROBLEMS</span></h2></div><p>Explore the business questions. Click any card to view its PostgreSQL solution.</p></div>
+      <div class="analysis-toolbar"><div class="segmented" role="group" aria-label="SQL difficulty"><button data-difficulty="All" class="selected" aria-pressed="true">All</button><button data-difficulty="Basic" aria-pressed="false">Basic</button><button data-difficulty="Intermediate" aria-pressed="false">Intermediate</button><button data-difficulty="Advanced" aria-pressed="false">Advanced</button></div><label class="search"><span class="sr-only">Search SQL questions</span><span aria-hidden="true">⌕</span><input type="search" id="sql-search" placeholder="Search India, actors, ratings…"></label></div>
+      <div class="results-line"><span id="result-count" aria-live="polite"></span><a href="sql/03_business_analysis.sql">View source SQL ↗</a></div><div id="questions" class="questions"></div><p id="no-results" class="panel empty-state" hidden>No matching questions. Try another keyword or choose All.</p>
+      <p class="fine">Difficulty reflects the actual query: window functions and CTEs are Advanced; array expansion, parsing and multi-stage subqueries are Intermediate.</p>
+    </div></section>
+    <section id="insights" class="section wrap"><div class="section-heading"><div><p class="eyebrow">06 / WHAT THE DATA SAYS</p><h2>Patterns worth <span>noticing.</span></h2></div><p>Descriptive findings from this dataset. No claims about viewing behaviour or business performance.</p></div><div id="insight-grid" class="insight-grid"></div></section>
+    <section id="stack" class="section wrap"><div class="section-heading"><div><p class="eyebrow">07 / UNDER THE HOOD</p><h2>Simple tools. <span>Substantial analysis.</span></h2></div></div><div class="stack-grid"><article class="panel"><span class="small-label">SQL SKILLS DEMONSTRATED</span><h3>A practical analytical toolkit.</h3><div class="inline-tags skills" id="sql-skills"></div><p class="fine">Includes CTEs, subqueries, window functions, conditional aggregation, string expansion and date parsing.</p></article><article class="panel"><span class="small-label">TECH STACK</span><dl class="tech-list"><div><dt>Database</dt><dd>PostgreSQL · pgAdmin</dd></div><div><dt>Analysis</dt><dd>SQL</dd></div><div><dt>Frontend</dt><dd>HTML5 · CSS3 · JavaScript · Chart.js</dd></div><div><dt>Version control</dt><dd>Git · GitHub</dd></div><div><dt>Deployment</dt><dd>GitHub Pages compatible</dd></div></dl></article></div>
+      <div class="project-grid"><div><span class="small-label">PROJECT STRUCTURE</span><h3>Trace every chart to its source.</h3><p>Precomputed aggregates keep the site lightweight. The optional Python helper reproduces the numbers using the standard library; the website itself needs only static files.</p><a class="button" href="https://github.com/Srishti140705/Netflix-Data-Analysis" target="_blank" rel="noopener noreferrer">Explore the repository ↗</a></div><pre class="file-tree">Netflix-Data-Analysis/
+├── Netflix-Data-Analysis/
+│   ├── data/netflix_titles (2).csv
+│   └── README.md
+├── sql/
+│   ├── 01_schema.sql
+│   ├── 02_data_exploration.sql
+│   └── 03_business_analysis.sql
+├── assets/catalogue-data.js
+├── tools/build_data.py
+├── index.html
+├── styles.css
+├── script.js
+├── FRONTEND.md
+└── README.md</pre></div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-main"><div><a class="brand" href="#home">NETFLIX<span> / DATA ANALYSIS</span></a><p>SQL-Driven Content Intelligence with PostgreSQL</p></div><div><p>Built by <strong>Srishti Raj</strong></p><a href="https://github.com/Srishti140705" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a><a href="https://github.com/Srishti140705/Netflix-Data-Analysis" target="_blank" rel="noopener noreferrer">Repository ↗</a></div></div><div class="wrap footer-note">This is an independent educational data analytics project and is not affiliated with or endorsed by Netflix.</div></footer>
+  <dialog id="sql-modal" class="sql-modal" aria-labelledby="modal-title" aria-describedby="modal-explanation">
+    <div class="sql-modal-heading">
+      <button id="modal-close" class="modal-close" aria-label="Close SQL solution" autofocus>×</button>
+      <p id="modal-meta" class="question-meta"></p>
+      <h2 id="modal-title"></h2>
+    </div>
+    <div class="sql-modal-body">
+      <p id="modal-explanation"></p>
+      <div class="code-toolbar"><span id="modal-query-label"></span><button id="modal-copy" class="copy-button" aria-live="polite">Copy SQL</button></div>
+      <pre class="code-block" tabindex="0" aria-label="PostgreSQL solution"><code id="modal-code"></code></pre>
+    </div>
+  </dialog>
+  <noscript><div class="noscript">Enable JavaScript for verified metrics, interactive charts and SQL questions. The original SQL files remain available through the source links above.</div></noscript>
+</body>
+</html>
